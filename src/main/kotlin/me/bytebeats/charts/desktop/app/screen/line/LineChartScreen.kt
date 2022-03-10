@@ -1,5 +1,6 @@
 package me.bytebeats.charts.desktop.app.screen.line
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -7,10 +8,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
 import me.bytebeats.charts.desktop.line.LineChart
+import me.bytebeats.charts.desktop.line.render.xaxis.SimpleXAxisDrawer
+import me.bytebeats.charts.desktop.line.render.yaxis.SimpleYAxisDrawer
 
 /**
  * @Author bytebeats
@@ -58,6 +62,7 @@ private fun LineChartContent() {
 
 @Composable
 private fun LineChartRow(lineChartDataModel: LineChartDataModel) {
+    val LABEL_TEXT_COLOR = if (isSystemInDarkTheme()) Color.White else Color.Black
     Box(
         modifier = Modifier
             .height(250.dp)
@@ -66,7 +71,9 @@ private fun LineChartRow(lineChartDataModel: LineChartDataModel) {
         LineChart(
             lineChartData = lineChartDataModel.lineChartData,
             horizontalOffset = lineChartDataModel.horizontalOffset,
-            pointDrawer = lineChartDataModel.pointDrawer
+            pointDrawer = lineChartDataModel.pointDrawer,
+            xAxisDrawer = SimpleXAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR),
+            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR)
         )
     }
 }

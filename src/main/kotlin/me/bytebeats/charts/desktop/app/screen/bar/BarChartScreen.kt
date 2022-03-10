@@ -1,5 +1,6 @@
 package me.bytebeats.charts.desktop.app.screen.bar
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -19,6 +21,8 @@ import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
 import me.bytebeats.charts.desktop.bar.BarChar
 import me.bytebeats.charts.desktop.bar.render.label.SimpleLabelDrawer
+import me.bytebeats.charts.desktop.bar.render.xaxis.SimpleXAxisDrawer
+import me.bytebeats.charts.desktop.bar.render.yaxis.SimpleYAxisDrawer
 
 /**
  * @Author bytebeats
@@ -64,6 +68,7 @@ private fun BarChartContent() {
 
 @Composable
 private fun BarChartRow(barChartDataModel: BarChartDataModel) {
+    val LABEL_TEXT_COLOR = if (isSystemInDarkTheme()) Color.White else Color.Black
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -72,7 +77,9 @@ private fun BarChartRow(barChartDataModel: BarChartDataModel) {
     ) {
         BarChar(
             barChartData = barChartDataModel.barChartData,
-            labelDrawer = barChartDataModel.labelDrawer
+            labelDrawer = barChartDataModel.labelDrawer,
+            xAxisDrawer = SimpleXAxisDrawer(axisLineColor = LABEL_TEXT_COLOR),
+            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR)
         )
     }
 }
