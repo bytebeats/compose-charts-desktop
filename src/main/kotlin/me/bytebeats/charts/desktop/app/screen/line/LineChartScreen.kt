@@ -62,7 +62,7 @@ private fun LineChartContent() {
 
 @Composable
 private fun LineChartRow(lineChartDataModel: LineChartDataModel) {
-    val LABEL_TEXT_COLOR = if (isSystemInDarkTheme()) Color.White else Color.Black
+    val axisLineColor = if (isSystemInDarkTheme()) Color.White else Color.Black
     Box(
         modifier = Modifier
             .height(250.dp)
@@ -72,8 +72,8 @@ private fun LineChartRow(lineChartDataModel: LineChartDataModel) {
             lineChartData = lineChartDataModel.lineChartData,
             horizontalOffset = lineChartDataModel.horizontalOffset,
             pointDrawer = lineChartDataModel.pointDrawer,
-            xAxisDrawer = SimpleXAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR),
-            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR)
+            xAxisDrawer = SimpleXAxisDrawer(labelTextColor = axisLineColor, axisLineColor = axisLineColor),
+            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = axisLineColor, axisLineColor = axisLineColor)
         )
     }
 }

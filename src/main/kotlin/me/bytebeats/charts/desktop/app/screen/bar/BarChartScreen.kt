@@ -68,7 +68,7 @@ private fun BarChartContent() {
 
 @Composable
 private fun BarChartRow(barChartDataModel: BarChartDataModel) {
-    val LABEL_TEXT_COLOR = if (isSystemInDarkTheme()) Color.White else Color.Black
+    val labelTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -78,8 +78,8 @@ private fun BarChartRow(barChartDataModel: BarChartDataModel) {
         BarChar(
             barChartData = barChartDataModel.barChartData,
             labelDrawer = barChartDataModel.labelDrawer,
-            xAxisDrawer = SimpleXAxisDrawer(axisLineColor = LABEL_TEXT_COLOR),
-            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = LABEL_TEXT_COLOR, axisLineColor = LABEL_TEXT_COLOR)
+            xAxisDrawer = SimpleXAxisDrawer(axisLineColor = labelTextColor),
+            yAxisDrawer = SimpleYAxisDrawer(labelTextColor = labelTextColor, axisLineColor = labelTextColor)
         )
     }
 }
