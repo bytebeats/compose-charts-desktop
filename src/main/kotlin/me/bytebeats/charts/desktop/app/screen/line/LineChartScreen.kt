@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
+import me.bytebeats.charts.desktop.app.theme.Purple500
 import me.bytebeats.charts.desktop.line.LineChart
 import me.bytebeats.charts.desktop.line.render.xaxis.SimpleXAxisDrawer
 import me.bytebeats.charts.desktop.line.render.yaxis.SimpleYAxisDrawer
@@ -37,7 +38,8 @@ fun LineChartScreen() {
                     )
                 }
             },
-            title = { Text(text = "Line Chart") }
+            title = { Text(text = "Line Chart") },
+            backgroundColor = Purple500
         )
     }) {
         LineChartContent()

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import me.bytebeats.charts.desktop.app.Screen
 import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
+import me.bytebeats.charts.desktop.app.theme.Purple500
 
 /**
  * @Author bytebeats
@@ -25,7 +26,7 @@ import me.bytebeats.charts.desktop.app.theme.Margins
 @Composable
 fun HomeScreen() {
     Scaffold(topBar = {
-        TopAppBar(title = { Text(text = "Compose Charts") })
+        TopAppBar(title = { Text(text = "Compose Charts") }, backgroundColor = Purple500)
     }) {
         HomeScreenContent()
     }

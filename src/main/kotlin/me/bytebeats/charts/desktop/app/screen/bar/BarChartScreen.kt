@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
+import me.bytebeats.charts.desktop.app.theme.Purple500
 import me.bytebeats.charts.desktop.bar.BarChar
 import me.bytebeats.charts.desktop.bar.render.label.SimpleLabelDrawer
 import me.bytebeats.charts.desktop.bar.render.xaxis.SimpleXAxisDrawer
@@ -36,14 +37,18 @@ import me.bytebeats.charts.desktop.bar.render.yaxis.SimpleYAxisDrawer
 @Composable
 fun BarChartScreen() {
     Scaffold(topBar = {
-        TopAppBar(navigationIcon = {
-            IconButton(onClick = { ScreenRouter.navigateHome() }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Go back home"
-                )
-            }
-        }, title = { Text(text = "Bar Chart") })
+        TopAppBar(
+            navigationIcon = {
+                IconButton(onClick = { ScreenRouter.navigateHome() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Go back home"
+                    )
+                }
+            },
+            title = { Text(text = "Bar Chart") },
+            backgroundColor = Purple500
+        )
     }) {
         BarChartContent()
     }

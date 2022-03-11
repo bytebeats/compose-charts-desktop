@@ -54,11 +54,6 @@ fun main() = application {
 }
 
 @Composable
-private fun WindowMenus() {
-
-}
-
-@Composable
 private fun FileDialog(parent: Frame? = null, onCloseRequest: (result: String?) -> Unit) =
     AwtWindow(create = {
         object : FileDialog(parent, "Choose a File", LOAD) {

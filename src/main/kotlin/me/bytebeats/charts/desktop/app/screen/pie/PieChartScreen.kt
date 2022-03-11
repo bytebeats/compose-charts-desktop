@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.bytebeats.charts.desktop.app.ScreenRouter
 import me.bytebeats.charts.desktop.app.theme.Margins
+import me.bytebeats.charts.desktop.app.theme.Purple500
 import me.bytebeats.charts.desktop.pie.PieChart
 import me.bytebeats.charts.desktop.pie.render.SimpleSliceDrawer
 
@@ -33,11 +34,15 @@ import me.bytebeats.charts.desktop.pie.render.SimpleSliceDrawer
 @Composable
 fun PieChartScreen() {
     Scaffold(topBar = {
-        TopAppBar(navigationIcon = {
-            IconButton(onClick = { ScreenRouter.navigateHome() }) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Go back Home")
-            }
-        }, title = { Text(text = "Pie Chart") })
+        TopAppBar(
+            navigationIcon = {
+                IconButton(onClick = { ScreenRouter.navigateHome() }) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "Go back Home")
+                }
+            },
+            title = { Text(text = "Pie Chart") },
+            backgroundColor = Purple500
+        )
     }) {
         PieChartScreenContent()
     }
