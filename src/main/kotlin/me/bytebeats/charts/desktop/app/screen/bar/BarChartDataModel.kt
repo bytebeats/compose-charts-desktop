@@ -71,7 +71,8 @@ class BarChartDataModel {
         set(value) {
             val color = when (value) {
                 SimpleLabelDrawer.DrawLocation.Inside -> Color.White
-                SimpleLabelDrawer.DrawLocation.Outside, SimpleLabelDrawer.DrawLocation.XAxis -> Color.Black
+                SimpleLabelDrawer.DrawLocation.Outside -> Color.Yellow
+                SimpleLabelDrawer.DrawLocation.XAxis -> Color.Green
             }
             labelDrawer = SimpleLabelDrawer(drawLocation = value, labelTextColor = color)
             field = value

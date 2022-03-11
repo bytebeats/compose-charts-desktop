@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import org.jetbrains.skia.Font
 import org.jetbrains.skia.Paint
+import org.jetbrains.skia.TextLine
 
 /**
  * @Author bytebeats
@@ -53,13 +54,14 @@ class SimpleLabelDrawer(
         xAxisArea: Rect
     ) {
         with(drawScope) {
-            val xCenter = barArea.left + barArea.width / 2
+            val textLine = TextLine.make(label, font(drawScope))
+            val xCenter = barArea.left + barArea.width / 2 - textLine.width / 2
             val yCenter = when (drawLocation) {
                 DrawLocation.Inside -> (barArea.top + barArea.bottom) / 2
                 DrawLocation.Outside -> barArea.top - labelTextSize.toPx() / 2
                 DrawLocation.XAxis -> barArea.bottom + labelTextHeight(drawScope)
             }
-            canvas.nativeCanvas.drawString(label, xCenter, yCenter, font(drawScope), mPaint)
+            canvas.nativeCanvas.drawTextLine(textLine, xCenter, yCenter, mPaint)
         }
     }
 

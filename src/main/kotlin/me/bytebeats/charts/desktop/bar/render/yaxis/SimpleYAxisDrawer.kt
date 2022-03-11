@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.bytebeats.charts.desktop.LabelFormatter
 import org.jetbrains.skia.Font
+import org.jetbrains.skia.TextLine
 import kotlin.math.roundToInt
 
 /**
@@ -69,9 +70,6 @@ class SimpleYAxisDrawer(
         maxValue: Float
     ) {
         with(drawScope) {
-            val labelPaint = mTextPaint.apply {
-//                textAlign = android.graphics.Paint.Align.RIGHT
-            }
             val labelFont = mTextFont.apply {
                 size = labelTextSize.toPx()
             }
@@ -81,10 +79,10 @@ class SimpleYAxisDrawer(
             for (i in 0..labelCount) {
                 val value = minValue + i * (maxValue - minValue) / labelCount
                 val label = labelValueFormatter(value)
-                val x = drawableArea.right - axisLineThickness.toPx() - labelTextSize.toPx() / 2F
-                val rect = labelFont.measureText(label, labelPaint)
-                val y = drawableArea.bottom - i * (totalHeight / labelCount) + rect.height / 2F
-                canvas.nativeCanvas.drawString(label, x, y, labelFont, labelPaint)
+                val textLine = TextLine.make(label, labelFont)
+                val x = drawableArea.right - axisLineThickness.toPx() - textLine.width - labelTextSize.toPx() / 2F
+                val y = drawableArea.bottom - i * (totalHeight / labelCount) + textLine.height / 2F
+                canvas.nativeCanvas.drawTextLine(textLine, x, y, mTextPaint)
             }
         }
     }
