@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.skia.Font
+import org.jetbrains.skia.TextLine
 
 /**
  * @Author bytebeats
@@ -41,7 +41,9 @@ class SimpleXAxisDrawer(
         }
     }
 
-    private val mTextFont by lazy { Font() }
+    private val mTextFont by lazy {
+        org.jetbrains.skia.Font()
+    }
 
     override fun requireHeight(drawScope: DrawScope): Float = with(drawScope) {
         1.5F * (labelTextSize.toPx() + axisLineThickness.toPx())
@@ -73,9 +75,10 @@ class SimpleXAxisDrawer(
             val labelIncrements = drawableArea.width / (labels.size - 1)
             labels.forEachIndexed { index, label ->
                 if (index.rem(drawLabelEvery) == 0) {
-                    val x = drawableArea.left + labelIncrements * index
+                    val textLine = TextLine.make(label, labelFont)
+                    val x = drawableArea.left + labelIncrements * index - textLine.width / 2
                     val y = drawableArea.bottom
-                    canvas.nativeCanvas.drawString(label, x, y, labelFont, labelPaint)
+                    canvas.nativeCanvas.drawTextLine(textLine, x, y, labelPaint)
                 }
             }
         }
