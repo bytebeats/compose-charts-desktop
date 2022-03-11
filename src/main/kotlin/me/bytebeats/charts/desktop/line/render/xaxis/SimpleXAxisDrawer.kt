@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import me.bytebeats.charts.desktop.AxisLabelFormatter
 import org.jetbrains.skia.TextLine
 
 /**
@@ -24,7 +25,8 @@ class SimpleXAxisDrawer(
     val labelTextColor: Color = Color.Black,
     val drawLabelEvery: Int = 1,// draw label text every $drawLabelEvery, like 1, 2, 3 and so on.
     val axisLineThickness: Dp = 1.dp,
-    val axisLineColor: Color = Color.Black
+    val axisLineColor: Color = Color.Black,
+    val axisLabelFormatter: AxisLabelFormatter = { value -> "$value" }
 ) : IXAxisDrawer {
     private val mAxisLinePaint by lazy {
         Paint().apply {
@@ -65,7 +67,7 @@ class SimpleXAxisDrawer(
         drawScope: DrawScope,
         canvas: Canvas,
         drawableArea: Rect,
-        labels: List<String>
+        labels: List<*>
     ) {
         with(drawScope) {
             val labelPaint = mTextPaint
@@ -75,7 +77,8 @@ class SimpleXAxisDrawer(
             val labelIncrements = drawableArea.width / (labels.size - 1)
             labels.forEachIndexed { index, label ->
                 if (index.rem(drawLabelEvery) == 0) {
-                    val textLine = TextLine.make(label, labelFont)
+                    val labelValue = axisLabelFormatter(label)
+                    val textLine = TextLine.make(labelValue, labelFont)
                     val x = drawableArea.left + labelIncrements * index - textLine.width / 2
                     val y = drawableArea.bottom
                     canvas.nativeCanvas.drawTextLine(textLine, x, y, labelPaint)

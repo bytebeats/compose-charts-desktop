@@ -10,3 +10,4 @@ package me.bytebeats.charts.desktop
  */
 
 typealias LabelFormatter = (value: Float) -> String
+typealias AxisLabelFormatter = (value: Any?) -> String

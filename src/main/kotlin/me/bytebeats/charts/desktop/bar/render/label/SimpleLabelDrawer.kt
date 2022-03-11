@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import me.bytebeats.charts.desktop.AxisLabelFormatter
 import org.jetbrains.skia.Font
 import org.jetbrains.skia.Paint
 import org.jetbrains.skia.TextLine
@@ -24,7 +25,8 @@ import org.jetbrains.skia.TextLine
 class SimpleLabelDrawer(
     val drawLocation: DrawLocation = DrawLocation.Inside,
     val labelTextSize: TextUnit = 12.sp,
-    val labelTextColor: Color = Color.Black
+    val labelTextColor: Color = Color.Black,
+    val axisLabelFormatter: AxisLabelFormatter = { value -> "$value" }
 ) : ILabelDrawer {
     private val mLabelTextArea: Float? = null
     private val mPaint by lazy {
@@ -49,12 +51,13 @@ class SimpleLabelDrawer(
     override fun drawLabel(
         drawScope: DrawScope,
         canvas: Canvas,
-        label: String,
+        label: Any?,
         barArea: Rect,
         xAxisArea: Rect
     ) {
         with(drawScope) {
-            val textLine = TextLine.make(label, font(drawScope))
+            val labelValue = axisLabelFormatter(label)
+            val textLine = TextLine.make(labelValue, font(drawScope))
             val xCenter = barArea.left + barArea.width / 2 - textLine.width / 2
             val yCenter = when (drawLocation) {
                 DrawLocation.Inside -> (barArea.top + barArea.bottom) / 2
