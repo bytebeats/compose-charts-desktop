@@ -107,7 +107,7 @@ fun BarChartView() {
         barDrawer = SimpleBarDrawer(),
         xAxisDrawer = SimpleXAxisDrawer(),
         yAxisDrawer = SimpleYAxisDrawer(),
-        labelDrawer = SimpleValueDrawer()
+        labelDrawer = SimpleLabelDrawer()
     ) 
 }
 ```
